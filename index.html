@@ -21,15 +21,17 @@
   body{
     background:var(--cream);
     font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;
-    min-height:100vh;
+    height:100vh;
+    height:100dvh;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:50px 20px;
+    padding:16px;
+    overflow:hidden;
   }
 
-  .screen{ display:none; width:100%; max-width:440px; }
-  .screen.active{ display:block; animation: fadeInUp .45s ease; }
+  .screen{ display:none; width:100%; max-width:440px; max-height:100%; }
+  .screen.active{ display:flex; flex-direction:column; justify-content:center; height:100%; animation: fadeInUp .45s ease; }
 
   @keyframes fadeInUp{
     from{ opacity:0; transform:translateY(10px); }
@@ -37,14 +39,14 @@
   }
 
   /* ============ LANDING PAGE ============ */
-  .landing-wrap{ position:relative; padding-top:30px; max-width:330px; margin:0 auto; }
+  .landing-wrap{ position:relative; padding-top:22px; max-width:330px; margin:0 auto; width:100%; }
 
   .badge{
     position:absolute;
-    top:-8px;
+    top:-10px;
     left:6px;
-    width:62px;
-    height:62px;
+    width:58px;
+    height:58px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -67,10 +69,11 @@
 
   .half{
     position:relative;
-    padding:26px 36px;
+    padding:18px 22px;
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
+    gap:14px;
     cursor:pointer;
     border:none;
     width:100%;
@@ -82,15 +85,21 @@
 
   .half-male{
     background:var(--blue);
-    padding-top:36px;
   }
   .half-female{
     background:var(--yellow);
   }
 
+  .half-text{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
   .half-text h2{
-    margin:0 0 10px 0;
-    font-size:28px;
+    margin:0 0 8px 0;
+    font-size:26px;
     font-weight:800;
     letter-spacing:0.3px;
   }
@@ -110,8 +119,8 @@
   .click-btn b{ font-weight:800; }
 
   .icon-slot{
-    width:85px;
-    height:85px;
+    width:100px;
+    height:100px;
     flex-shrink:0;
     display:flex;
     align-items:center;
@@ -119,25 +128,22 @@
     overflow:hidden;
   }
   .icon-slot img{ width:100%; height:100%; object-fit:contain; }
-  .half-female .icon-slot{ order:2; }
-  .half-female{ flex-direction:row; }
 
   .social-row{
     display:flex;
-    justify-content:flex-end;
-    gap:10px;
-    margin-top:16px;
-    padding-right:4px;
+    justify-content:center;
+    gap:12px;
+    margin-top:14px;
   }
-  .social-row svg{ width:24px; height:24px; }
+  .social-row svg{ width:22px; height:22px; }
 
   .logo-wrap{
     display:flex;
     justify-content:center;
   }
-  .logo-wrap.logo-top{ margin-bottom:26px; }
+  .logo-wrap.logo-top{ margin-bottom:16px; }
   .logo-wrap.logo-bottom{ margin-top:20px; }
-  .logo-wrap img{ height:110px; }
+  .logo-wrap img{ height:70px; }
   .logo-fallback{
     font-weight:800;
     color:var(--blue);
@@ -150,10 +156,10 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    margin-bottom:34px;
+    margin-bottom:24px;
   }
-  .list-header img{ height:96px; margin-bottom:16px; }
-  .list-header .logo-fallback{ font-size:22px; margin-bottom:16px; }
+  .list-header img{ height:70px; margin-bottom:12px; }
+  .list-header .logo-fallback{ font-size:22px; margin-bottom:12px; }
   .back-btn{
     align-self:flex-start;
     background:none;
@@ -163,11 +169,11 @@
     cursor:pointer;
     font-size:13px;
     font-family:inherit;
-    margin-bottom:16px;
+    margin-bottom:12px;
     padding:0;
   }
   .list-title{
-    font-size:34px;
+    font-size:30px;
     font-weight:800;
     color:var(--ink);
     margin:0;
@@ -182,6 +188,8 @@
     row-gap:6px;
     column-gap:6px;
     width:100%;
+    overflow-y:auto;
+    max-height:calc(100dvh - 220px);
   }
 
   .name-btn{
@@ -225,10 +233,16 @@
     </div>
     <div class="landing-wrap">
       <div class="badge">
-        <svg viewBox="0 0 51 48" xmlns="http://www.w3.org/2000/svg">
-          <path d="M25.5 6 L30 18.5 L45 18.5 L33.5 27.5 L37.5 41 L25.5 32.5 L13.5 41 L17.5 27.5 L6 18.5 L21 18.5 Z"
-                fill="var(--yellow)" stroke="var(--yellow)" stroke-width="11"
-                stroke-linejoin="round" stroke-linecap="round"/>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="roundStar" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+              <feColorMatrix in="blur" mode="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -10" result="goo"/>
+            </filter>
+          </defs>
+          <path filter="url(#roundStar)" fill="var(--yellow)"
+            d="M50,10 L59.4,37.1 L88.0,37.6 L65.2,54.9 L73.5,82.4 L50,66 L26.5,82.4 L34.8,54.9 L12.0,37.6 L40.6,37.1 Z"/>
         </svg>
       </div>
       <div class="card">
@@ -391,7 +405,6 @@ renderGrid('grid-female', parseData(FEMALE_DATA));
 function goTo(page){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
 </body>
