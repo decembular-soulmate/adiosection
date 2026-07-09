@@ -185,7 +185,7 @@
   }
 
   .name-btn{
-    padding:6px 12px;
+    padding:6px 8px;
     border-radius:999px;
     font-weight:500;
     font-size:11.5px;
@@ -359,9 +359,9 @@ function textWidth(text, font){
 function renderGrid(containerId, data){
   const container = document.getElementById(containerId);
   container.innerHTML = '';
-  const font = '500 14px Inter, sans-serif';
-  const HORIZONTAL_PADDING = 36; /* 18px left + 18px right, matches .name-btn padding */
-  const BORDER_ALLOWANCE = 3; /* 1.5px border on each side when flipped */
+  const font = '500 11.5px Inter, sans-serif';
+  const HORIZONTAL_PADDING = 16; /* 8px left + 8px right, matches .name-btn padding */
+  const BORDER_ALLOWANCE = 2.4; /* 1.2px border on each side when flipped */
 
   data.forEach((item, i) => {
     const btn = document.createElement('button');
