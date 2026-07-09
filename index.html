@@ -37,12 +37,12 @@
   }
 
   /* ============ LANDING PAGE ============ */
-  .landing-wrap{ position:relative; padding-top:30px; }
+  .landing-wrap{ position:relative; padding-top:30px; max-width:330px; margin:0 auto; }
 
   .badge{
     position:absolute;
     top:-8px;
-    left:10px;
+    left:6px;
     width:62px;
     height:62px;
     display:flex;
@@ -50,7 +50,6 @@
     justify-content:center;
     z-index:5;
     animation: badgeFloat 3.2s ease-in-out infinite;
-    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.12));
   }
   .badge svg{ width:100%; height:100%; }
 
@@ -111,10 +110,8 @@
   .click-btn b{ font-weight:800; }
 
   .icon-slot{
-    width:66px;
-    height:66px;
-    border-radius:50%;
-    background:var(--white);
+    width:84px;
+    height:84px;
     flex-shrink:0;
     display:flex;
     align-items:center;
@@ -132,14 +129,15 @@
     margin-top:16px;
     padding-right:4px;
   }
-  .social-row svg{ width:19px; height:19px; }
+  .social-row svg{ width:24px; height:24px; }
 
   .logo-wrap{
     display:flex;
     justify-content:center;
-    margin-top:20px;
   }
-  .logo-wrap img{ height:54px; }
+  .logo-wrap.logo-top{ margin-bottom:26px; }
+  .logo-wrap.logo-bottom{ margin-top:20px; }
+  .logo-wrap img{ height:68px; }
   .logo-fallback{
     font-weight:800;
     color:var(--blue);
@@ -154,7 +152,7 @@
     align-items:center;
     margin-bottom:34px;
   }
-  .list-header img{ height:58px; margin-bottom:16px; }
+  .list-header img{ height:66px; margin-bottom:16px; }
   .list-header .logo-fallback{ font-size:22px; margin-bottom:16px; }
   .back-btn{
     align-self:flex-start;
@@ -222,11 +220,14 @@
 
   <!-- ============ PAGE 1: LANDING ============ -->
   <div class="screen active" id="page-landing">
+    <div class="logo-wrap logo-top">
+      <img src="assets/logo.png" alt="adiosection" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',innerText:'adiosection'}))">
+    </div>
     <div class="landing-wrap">
       <div class="badge">
         <svg viewBox="0 0 51 48" xmlns="http://www.w3.org/2000/svg">
-          <path d="M25.5 4 L31 18.5 L47 18.5 L34.5 28 L39 43 L25.5 33.5 L12 43 L16.5 28 L4 18.5 L20 18.5 Z"
-                fill="var(--yellow)" stroke="var(--yellow)" stroke-width="7"
+          <path d="M25.5 6 L30 18.5 L45 18.5 L33.5 27.5 L37.5 41 L25.5 32.5 L13.5 41 L17.5 27.5 L6 18.5 L21 18.5 Z"
+                fill="var(--yellow)" stroke="var(--yellow)" stroke-width="11"
                 stroke-linejoin="round" stroke-linecap="round"/>
         </svg>
       </div>
@@ -248,12 +249,10 @@
       </div>
 
       <div class="social-row">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 2.5 5 6 5c2 0 3.5 1 4.5 2.5C11.5 6 13 5 15 5c3.5 0 5.5 3.5 3.5 7.5C19 16.65 12 21 12 21z"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
-      </div>
-
-      <div class="logo-wrap">
-        <img src="assets/logo.png" alt="adiosection" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',innerText:'adiosection'}))">
+        <svg viewBox="0 0 24 24" fill="var(--blue)" stroke="var(--blue)" stroke-width="1" stroke-linejoin="round">
+          <path d="M11.3 20.2C9.3 18.5 3 13.3 1.6 9.4C.4 6.1 2.6 3 6 3c2 0 3.7 1 4.5 2.6C11.3 4 13 3 15 3c3.4 0 5.6 3.1 4.4 6.4C18 13.3 14.7 18.5 12.7 20.2 Q12 21 11.3 20.2 Z"/>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="var(--blue)" stroke="var(--blue)" stroke-width="1" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
       </div>
     </div>
   </div>
@@ -286,33 +285,53 @@
    ========================================================= */
 
 const MALE_DATA = `
-  {"Budi Santoso","budi_s"},
-  {"Andi","andi.id"},
-  {"Reza Pratama","rezap"},
-  {"Fajar","fajar99"},
-  {"Dimas Aditya","dimasa"},
-  {"Rian","rian.r"},
-  {"Yusuf","yusuf_"},
-  {"Kevin","kevin.k"},
-  {"Bayu Saputra","bayus"},
-  {"Fikri","fikri.f"},
-  {"Doni","doni_d"},
-  {"Adit","adit.a"}
+  {"Zhang Hao","@ayamkecap"},
+  {"Sung Hanbin","@basourat"},
+  {"Ricky","@kadalterbang"},
+  {"Kim Jiwoong","@nasigorenggalau"},
+  {"Seok Matthew","@mieayamterbang"},
+  {"Park Gunwook","@estehmanis"},
+  {"Han Yujin","@kerupukpetir"},
+  {"Sohee","@kopisantan"},
+  {"Wonbin","@bebekrebahan"},
+  {"Anton","@cirengjuara"},
+  {"Eunseok","@pisanggoreng"},
+  {"Shotaro","@sambalterasi"},
+  {"Sion","@cilokpremium"},
+  {"Yushi","@martabakmini"},
+  {"Riku","@ikanterbang"},
+  {"Jaehee","@odadinggaming"},
+  {"Ryo","@bakwancrispy"},
+  {"Harua","@tempeoverload"},
+  {"K","@semangkakocak"},
+  {"Nicholas","@buburdiaduk"},
+  {"Taki","@kentangmelayang"},
+  {"Yuma","@rotibakarabis"}
 `;
 
 const FEMALE_DATA = `
-  {"Sari Dewi","sari_d"},
-  {"Putri","putri.p"},
-  {"Ayu Lestari","ayul"},
-  {"Nadia","nadia_n"},
-  {"Rina Wulandari","rinaw"},
-  {"Dinda","dinda.d"},
-  {"Wulan","wulan_w"},
-  {"Citra","citra.c"},
-  {"Maya Anggraini","mayaa"},
-  {"Sinta","sinta.s"},
-  {"Intan","intan_i"},
-  {"Fira","fira.f"}
+  {"Zhang Hao","@ayamkecap"},
+  {"Sung Hanbin","@basourat"},
+  {"Ricky","@kadalterbang"},
+  {"Kim Jiwoong","@nasigorenggalau"},
+  {"Seok Matthew","@mieayamterbang"},
+  {"Park Gunwook","@estehmanis"},
+  {"Han Yujin","@kerupukpetir"},
+  {"Sohee","@kopisantan"},
+  {"Wonbin","@bebekrebahan"},
+  {"Anton","@cirengjuara"},
+  {"Eunseok","@pisanggoreng"},
+  {"Shotaro","@sambalterasi"},
+  {"Sion","@cilokpremium"},
+  {"Yushi","@martabakmini"},
+  {"Riku","@ikanterbang"},
+  {"Jaehee","@odadinggaming"},
+  {"Ryo","@bakwancrispy"},
+  {"Harua","@tempeoverload"},
+  {"K","@semangkakocak"},
+  {"Nicholas","@buburdiaduk"},
+  {"Taki","@kentangmelayang"},
+  {"Yuma","@rotibakarabis"}
 `;
 
 function parseData(raw){
