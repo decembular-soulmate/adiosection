@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>adiosection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fcf9ee;
+    --blue:#0063c3;
+    --yellow:#f3d141;
+    --ink:#252525;
+    --white:#ffffff;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:50px 20px;
+  }
+
+  .screen{ display:none; width:100%; max-width:440px; }
+  .screen.active{ display:block; }
+
+  /* ============ LANDING PAGE ============ */
+  .landing-wrap{ position:relative; padding-top:30px; }
+
+  .badge{
+    position:absolute;
+    top:0;
+    left:18px;
+    width:56px;
+    height:56px;
+    background:var(--yellow);
+    color:var(--blue);
+    font-size:15px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:5;
+    clip-path: polygon(
+      50% 0%, 61% 12%, 75% 4%, 78% 19%, 93% 16%, 90% 31%,
+      100% 38%, 90% 47%, 98% 60%, 84% 62%, 85% 78%, 71% 73%,
+      66% 88%, 54% 78%, 44% 92%, 36% 78%, 22% 86%, 22% 70%,
+      6% 70%, 14% 56%, 2% 44%, 16% 38%, 8% 22%, 24% 22%,
+      26% 6%, 40% 14%
+    );
+  }
+
+  .card{
+    position:relative;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 0 0 2px rgba(0,0,0,0.04);
+  }
+
+  .half{
+    position:relative;
+    padding:26px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
+    border:none;
+    width:100%;
+    text-align:left;
+    font-family:inherit;
+  }
+
+  .half-male{
+    background:var(--blue);
+    padding-top:36px;
+  }
+  .half-female{
+    background:var(--yellow);
+  }
+
+  .half-text h2{
+    margin:0 0 10px 0;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:0.3px;
+  }
+  .half-male h2{ color:var(--yellow); }
+  .half-female h2{ color:var(--blue); }
+
+  .click-btn{
+    display:inline-block;
+    background:var(--white);
+    color:var(--ink);
+    font-weight:600;
+    font-size:12px;
+    padding:7px 16px;
+    border-radius:999px;
+    border:none;
+  }
+  .click-btn b{ font-weight:800; }
+
+  .icon-slot{
+    width:66px;
+    height:66px;
+    border-radius:50%;
+    background:var(--white);
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .icon-slot img{ width:100%; height:100%; object-fit:contain; }
+  .half-female .icon-slot{ order:2; }
+  .half-female{ flex-direction:row; }
+
+  .notch{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:24px;
+    height:24px;
+    background:var(--cream);
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    z-index:3;
+  }
+
+  .social-row{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:16px;
+    padding-right:4px;
+  }
+  .social-row svg{ width:19px; height:19px; }
+
+  .logo-wrap{
+    display:flex;
+    justify-content:center;
+    margin-top:20px;
+  }
+  .logo-wrap img{ height:44px; }
+  .logo-fallback{
+    font-weight:800;
+    color:var(--blue);
+    font-size:17px;
+    letter-spacing:1px;
+  }
+
+  /* ============ LIST PAGES ============ */
+  .list-header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:34px;
+  }
+  .list-header img{ height:44px; margin-bottom:16px; }
+  .back-btn{
+    align-self:flex-start;
+    background:none;
+    border:none;
+    font-weight:700;
+    color:var(--ink);
+    cursor:pointer;
+    font-size:13px;
+    font-family:inherit;
+    margin-bottom:16px;
+    padding:0;
+  }
+  .list-title{
+    font-size:34px;
+    font-weight:800;
+    color:var(--ink);
+    margin:0;
+    text-align:center;
+    letter-spacing:0.3px;
+  }
+
+  .name-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    row-gap:8px;
+    column-gap:8px;
+    width:100%;
+  }
+
+  .name-btn{
+    padding:11px 18px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:14px;
+    font-family:inherit;
+    white-space:nowrap;
+    cursor:pointer;
+    border:2px solid transparent;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    transition:transform .12s ease;
+    user-select:none;
+    flex-grow:0;
+    flex-shrink:0;
+  }
+  .name-btn:active{ transform:scale(0.96); }
+
+  .name-btn.c-blue{ background:var(--blue); color:var(--white); }
+  .name-btn.c-yellow{ background:var(--yellow); color:var(--blue); }
+  .name-btn.c-black{ background:var(--ink); color:var(--white); }
+
+  .name-btn.flipped{
+    background:var(--white);
+    color:var(--ink);
+  }
+  .name-btn.flipped.c-blue{ border-color:var(--blue); }
+  .name-btn.flipped.c-yellow{ border-color:var(--yellow); }
+  .name-btn.flipped.c-black{ border-color:var(--ink); }
+
+</style>
+</head>
+<body>
+
+  <!-- ============ PAGE 1: LANDING ============ -->
+  <div class="screen active" id="page-landing">
+    <div class="landing-wrap">
+      <div class="badge">+1</div>
+      <div class="card">
+        <button class="half half-male" onclick="goTo('male')">
+          <div class="icon-slot"><img src="assets/icon1.png" alt="" onerror="this.style.display='none'"></div>
+          <div class="half-text">
+            <h2>MALE</h2>
+            <span class="click-btn">Click <b>here</b></span>
+          </div>
+        </button>
+        <div class="notch"></div>
+        <button class="half half-female" onclick="goTo('female')">
+          <div class="half-text">
+            <h2>FEMALE</h2>
+            <span class="click-btn">Click <b>here</b></span>
+          </div>
+          <div class="icon-slot"><img src="assets/icon2.png" alt="" onerror="this.style.display='none'"></div>
+        </button>
+      </div>
+
+      <div class="social-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 2.5 5 6 5c2 0 3.5 1 4.5 2.5C11.5 6 13 5 15 5c3.5 0 5.5 3.5 3.5 7.5C19 16.65 12 21 12 21z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+      </div>
+
+      <div class="logo-wrap">
+        <img src="assets/logo.png" alt="adiosection" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',innerText:'adiosection'}))">
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 2/3: MALE LIST ============ -->
+  <div class="screen" id="page-male">
+    <div class="list-header">
+      <button class="back-btn" onclick="goTo('landing')">&larr; back</button>
+      <img src="assets/logo.png" alt="adiosection" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',innerText:'adiosection'}))">
+      <h1 class="list-title">MALE</h1>
+    </div>
+    <div class="name-grid" id="grid-male"></div>
+  </div>
+
+  <!-- ============ PAGE 2/3: FEMALE LIST ============ -->
+  <div class="screen" id="page-female">
+    <div class="list-header">
+      <button class="back-btn" onclick="goTo('landing')">&larr; back</button>
+      <img src="assets/logo.png" alt="adiosection" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',innerText:'adiosection'}))">
+      <h1 class="list-title">FEMALE</h1>
+    </div>
+    <div class="name-grid" id="grid-female"></div>
+  </div>
+
+<script>
+/* =========================================================
+   DATA INPUT
+   Format bebas jumlahnya, pisahkan tiap pasangan dengan koma:
+   {"Nama","username"},{"Nama","username"},{"Nama","username"}
+   ========================================================= */
+
+const MALE_DATA = `
+  {"Budi Santoso","budi_s"},
+  {"Andi","andi.id"},
+  {"Reza Pratama","rezap"},
+  {"Fajar","fajar99"},
+  {"Dimas Aditya","dimasa"},
+  {"Rian","rian.r"},
+  {"Yusuf","yusuf_"},
+  {"Kevin","kevin.k"},
+  {"Bayu Saputra","bayus"},
+  {"Fikri","fikri.f"},
+  {"Doni","doni_d"},
+  {"Adit","adit.a"}
+`;
+
+const FEMALE_DATA = `
+  {"Sari Dewi","sari_d"},
+  {"Putri","putri.p"},
+  {"Ayu Lestari","ayul"},
+  {"Nadia","nadia_n"},
+  {"Rina Wulandari","rinaw"},
+  {"Dinda","dinda.d"},
+  {"Wulan","wulan_w"},
+  {"Citra","citra.c"},
+  {"Maya Anggraini","mayaa"},
+  {"Sinta","sinta.s"},
+  {"Intan","intan_i"},
+  {"Fira","fira.f"}
+`;
+
+function parseData(raw){
+  const pairs = [];
+  const regex = /\{\s*"([^"]*)"\s*,\s*"([^"]*)"\s*\}/g;
+  let m;
+  while((m = regex.exec(raw)) !== null){
+    pairs.push({ nama: m[1].trim(), uname: m[2].trim() });
+  }
+  return pairs;
+}
+
+const COLOR_CYCLE = ['c-blue','c-black','c-yellow'];
+
+/* measure text width using a hidden canvas so the button width
+   can be locked to whichever of nama/uname is longer — this keeps
+   the button the same size before and after it's clicked */
+const measureCanvas = document.createElement('canvas');
+const measureCtx = measureCanvas.getContext('2d');
+function textWidth(text, font){
+  measureCtx.font = font;
+  return measureCtx.measureText(text).width;
+}
+
+function renderGrid(containerId, data){
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  const font = '700 14px Inter, sans-serif';
+  const HORIZONTAL_PADDING = 36; /* 18px left + 18px right, matches .name-btn padding */
+  const BORDER_ALLOWANCE = 4; /* 2px border on each side when flipped */
+
+  data.forEach((item, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'name-btn ' + COLOR_CYCLE[i % COLOR_CYCLE.length];
+    btn.textContent = item.nama;
+    btn.dataset.nama = item.nama;
+    btn.dataset.uname = item.uname;
+    btn.dataset.flipped = 'false';
+
+    const widestText = textWidth(item.nama, font) > textWidth(item.uname, font) ? item.nama : item.uname;
+    const fixedWidth = Math.ceil(textWidth(widestText, font) + HORIZONTAL_PADDING + BORDER_ALLOWANCE);
+    btn.style.width = fixedWidth + 'px';
+
+    btn.addEventListener('click', () => {
+      const flipped = btn.dataset.flipped === 'true';
+      btn.dataset.flipped = flipped ? 'false' : 'true';
+      btn.classList.toggle('flipped', !flipped);
+      btn.textContent = flipped ? item.nama : item.uname;
+    });
+    container.appendChild(btn);
+  });
+}
+
+renderGrid('grid-male', parseData(MALE_DATA));
+renderGrid('grid-female', parseData(FEMALE_DATA));
+
+function goTo(page){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
