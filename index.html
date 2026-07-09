@@ -23,38 +23,40 @@
     font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;
     min-height:100vh;
     display:flex;
-    align-items:flex-start;
+    align-items:center;
     justify-content:center;
     padding:50px 20px;
   }
 
   .screen{ display:none; width:100%; max-width:440px; }
-  .screen.active{ display:block; }
+  .screen.active{ display:block; animation: fadeInUp .45s ease; }
+
+  @keyframes fadeInUp{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
 
   /* ============ LANDING PAGE ============ */
   .landing-wrap{ position:relative; padding-top:30px; }
 
   .badge{
     position:absolute;
-    top:0;
-    left:18px;
-    width:56px;
-    height:56px;
-    background:var(--yellow);
-    color:var(--blue);
-    font-size:15px;
-    font-weight:800;
+    top:-8px;
+    left:10px;
+    width:62px;
+    height:62px;
     display:flex;
     align-items:center;
     justify-content:center;
     z-index:5;
-    clip-path: polygon(
-      50% 0%, 61% 12%, 75% 4%, 78% 19%, 93% 16%, 90% 31%,
-      100% 38%, 90% 47%, 98% 60%, 84% 62%, 85% 78%, 71% 73%,
-      66% 88%, 54% 78%, 44% 92%, 36% 78%, 22% 86%, 22% 70%,
-      6% 70%, 14% 56%, 2% 44%, 16% 38%, 8% 22%, 24% 22%,
-      26% 6%, 40% 14%
-    );
+    animation: badgeFloat 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.12));
+  }
+  .badge svg{ width:100%; height:100%; }
+
+  @keyframes badgeFloat{
+    0%,100%{ transform: translateY(0) rotate(-5deg); }
+    50%{ transform: translateY(-7px) rotate(5deg); }
   }
 
   .card{
@@ -66,7 +68,7 @@
 
   .half{
     position:relative;
-    padding:26px 22px;
+    padding:26px 36px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -75,7 +77,9 @@
     width:100%;
     text-align:left;
     font-family:inherit;
+    transition: filter .15s ease;
   }
+  .half:hover{ filter:brightness(1.04); }
 
   .half-male{
     background:var(--blue);
@@ -121,18 +125,6 @@
   .half-female .icon-slot{ order:2; }
   .half-female{ flex-direction:row; }
 
-  .notch{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:24px;
-    height:24px;
-    background:var(--cream);
-    clip-path: polygon(50% 100%, 0 0, 100% 0);
-    z-index:3;
-  }
-
   .social-row{
     display:flex;
     justify-content:flex-end;
@@ -147,11 +139,11 @@
     justify-content:center;
     margin-top:20px;
   }
-  .logo-wrap img{ height:44px; }
+  .logo-wrap img{ height:54px; }
   .logo-fallback{
     font-weight:800;
     color:var(--blue);
-    font-size:17px;
+    font-size:19px;
     letter-spacing:1px;
   }
 
@@ -162,7 +154,8 @@
     align-items:center;
     margin-bottom:34px;
   }
-  .list-header img{ height:44px; margin-bottom:16px; }
+  .list-header img{ height:58px; margin-bottom:16px; }
+  .list-header .logo-fallback{ font-size:22px; margin-bottom:16px; }
   .back-btn{
     align-self:flex-start;
     background:none;
@@ -194,19 +187,19 @@
   }
 
   .name-btn{
-    padding:11px 18px;
+    padding:9px 18px;
     border-radius:999px;
-    font-weight:700;
+    font-weight:500;
     font-size:14px;
     font-family:inherit;
     white-space:nowrap;
     cursor:pointer;
-    border:2px solid transparent;
+    border:1.5px solid transparent;
     display:inline-flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    transition:transform .12s ease;
+    transition:transform .12s ease, border-color .15s ease, background-color .15s ease;
     user-select:none;
     flex-grow:0;
     flex-shrink:0;
@@ -220,10 +213,8 @@
   .name-btn.flipped{
     background:var(--white);
     color:var(--ink);
+    border-color:var(--ink);
   }
-  .name-btn.flipped.c-blue{ border-color:var(--blue); }
-  .name-btn.flipped.c-yellow{ border-color:var(--yellow); }
-  .name-btn.flipped.c-black{ border-color:var(--ink); }
 
 </style>
 </head>
@@ -232,7 +223,13 @@
   <!-- ============ PAGE 1: LANDING ============ -->
   <div class="screen active" id="page-landing">
     <div class="landing-wrap">
-      <div class="badge">+1</div>
+      <div class="badge">
+        <svg viewBox="0 0 51 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25.5 4 L31 18.5 L47 18.5 L34.5 28 L39 43 L25.5 33.5 L12 43 L16.5 28 L4 18.5 L20 18.5 Z"
+                fill="var(--yellow)" stroke="var(--yellow)" stroke-width="7"
+                stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+      </div>
       <div class="card">
         <button class="half half-male" onclick="goTo('male')">
           <div class="icon-slot"><img src="assets/icon1.png" alt="" onerror="this.style.display='none'"></div>
@@ -241,7 +238,6 @@
             <span class="click-btn">Click <b>here</b></span>
           </div>
         </button>
-        <div class="notch"></div>
         <button class="half half-female" onclick="goTo('female')">
           <div class="half-text">
             <h2>FEMALE</h2>
@@ -344,9 +340,9 @@ function textWidth(text, font){
 function renderGrid(containerId, data){
   const container = document.getElementById(containerId);
   container.innerHTML = '';
-  const font = '700 14px Inter, sans-serif';
+  const font = '500 14px Inter, sans-serif';
   const HORIZONTAL_PADDING = 36; /* 18px left + 18px right, matches .name-btn padding */
-  const BORDER_ALLOWANCE = 4; /* 2px border on each side when flipped */
+  const BORDER_ALLOWANCE = 3; /* 1.5px border on each side when flipped */
 
   data.forEach((item, i) => {
     const btn = document.createElement('button');
